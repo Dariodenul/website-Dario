@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>shop</title>
+  <title>Contact</title>
   <!-- resetten van browsers -->
   <link rel="stylesheet" href="css/reset.css">
   <!-- Bootstrap CSS -->
@@ -17,9 +17,13 @@
     </script>
   <!-- eigen geschreven css voor jouw html-bestand -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 </head>
 
 <body>
+
   <header class="py-3 border-bottom bg-white">
     <nav class="navbar navbar-expand-md navbar-light container">
       <a class="navbar-brand" href="contact.html">
@@ -38,32 +42,67 @@
       </div>
     </nav>
   </header>
+  <div id="map" style="height: 300px;"></div>
+
   <main class="container my-5">
 
     <section class="row align-items-start mb-5">
       <div class="col-md-4 text-center mb-4 mb-md-0">
-        <img src="assets/server-2160321_1280.jpg" alt="sfeerbeeld-3" width="300" class="img-fluid rounded border">
+        <img src="assets/server-2160321_1280.jpg" alt="sfeerbeeld-3" width="300" height="400"
+          class="img-fluid rounded border">
       </div>
       <div class="col-md-8">
-        <h2>Contact</h2>
-        <form class="search-form mt-3" action="#" method="GET">
-          <input type="text" name="zoekterm" placeholder="Vraag" class="search-input" />
-          <button type="submit" class="search-button">Indienen</button>
+        <h1>Contact</h1>
+        <form action="#" method="POST">
+          <div class="mb-3">
+            <label for="naam" class="form-label"><strong>Jouw naam</strong></label>
+            <input type="text" class="form-control" id="naam" name="naam" placeholder="Vul je naam in" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label"><strong>Jouw email-adres</strong></label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="voorbeeld@mail.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="vraag" class="form-label"><strong>Stel jouw vraag:</strong></label>
+            <textarea class="form-control" id="vraag" name="vraag" rows="4" placeholder="Stel hier je vraag..."
+              required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success">Indienen</button>
         </form>
+
       </div>
+
     </section>
-    <aside class="col-md-4"></aside>
+
   </main>
 
-  <footer class="bg-white border-top py-4 mt-5">
+  <footer class="footer">
     <div class="container text-center">
       <p class="fw-bold mb-3">Contactgegevens</p>
       <p class="mb-1">Tel: <strong>+32478189891</strong></p>
       <p class="mb-1">Email: <strong>denul.dario@hotmail.com</strong></p>
       <p class="mb-1">Schoolmail: <strong>s16755@ap.student.be</strong></p>
-      <p class="mb-0">Locatie: <strong>Antwerpen, België</strong></p>
+      <p class="mb-1">Locatie: <strong>Antwerpen, België</strong></p>
+      <p class="mb-1">© <span id="year"></span> <span class="footer-name">Dario De Nul</span></p>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    var map = L.map('map').setView([51.1766, 4.3651], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    L.marker([51.1766, 4.3651]).addTo(map)
+      .bindPopup('Hoboken, België')
+      .openPopup();
+  </script>
 </body>
 
 </html>
